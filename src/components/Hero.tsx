@@ -1,10 +1,42 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import Tilt from "react-parallax-tilt";
+import Particles from "@tsparticles/react";
+
 
 const Hero: React.FC = () => {
   return (
-    <section id="about" className="min-h-screen flex items-center pt-20">
-      <div className="container mx-auto px-4 grid md:grid-cols-2 gap-8 items-center">
+    <section id="about" className="min-h-screen flex items-center pt-20 relative overflow-hidden">
+      {/* Animated Blobs */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
+        <motion.div
+          animate={{ x: [0, 80, 0], y: [0, -50, 0] }}
+          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute top-20 left-20 w-72 h-72 bg-cyan-500/10 blur-3xl rounded-full"
+        />
+        <motion.div
+          animate={{ x: [0, -80, 0], y: [0, 60, 0] }}
+          transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute bottom-20 right-20 w-96 h-96 bg-blue-500/10 blur-3xl rounded-full"
+        />
+      </div>
+
+      <Particles
+        options={{
+          fullScreen: false,
+          particles: {
+            number: { value: 40 },
+            color: { value: "#22d3ee" },
+            opacity: { value: 0.2 },
+            size: { value: 2 },
+            move: { enable: true, speed: 1 },
+            links: { enable: true, color: "#22d3ee", opacity: 0.15 },
+          },
+        }}
+        className="absolute inset-0 z-0"
+      />
+
+      <div className="container mx-auto px-4 grid md:grid-cols-2 gap-8 items-center relative z-10">
         <motion.div
           initial={{ opacity: 0, x: -50 }}
           animate={{ opacity: 1, x: 0 }}
@@ -18,7 +50,7 @@ const Hero: React.FC = () => {
             Hello! I'm Ritik Ranjan, a Computer Science Engineering graduate from Haldia Institute of Technology (Batch of 2025). Currently, I’m working as a Full Stack Developer, specializing in backend development with .NET and frontend development using React, TypeScript, and Ant Design. 
           </p>
           <p className="mb-6 text-gray-400 max-w-lg">
-         I’m passionate about web development, problem-solving, and creating responsive, user-friendly applications that combine technical excellence with creativity.
+        I am a Full Stack Developer specializing in React, Node.js, .NET and modern web technologies. I enjoy building scalable applications, solving real-world problems and creating user-friendly digital experiences.
           </p>
           <div className="flex flex-wrap gap-4">
             <motion.a
@@ -51,13 +83,33 @@ const Hero: React.FC = () => {
           transition={{ duration: 0.5, delay: 0.2 }}
           className="order-1 md:order-2 relative"
         >
-          <div className="relative z-10 overflow-hidden rounded-xl">
-            <img 
-              src={process.env.PUBLIC_URL + '/assets/profile.png'} 
-              alt="Ritik Ranjan" 
-              className="w-full max-w-md mx-auto"
-            />
-          </div>
+          <Tilt
+            tiltMaxAngleX={10}
+            tiltMaxAngleY={10}
+            glareEnable={true}
+            glareMaxOpacity={0.2}
+            scale={1.02}
+            className="relative z-20 w-full max-w-md mx-auto"
+          >
+                <div className="relative backdrop-blur-xl bg-white/5 border border-white/10 rounded-3xl p-4 overflow-hidden">
+                  <motion.div
+                    animate={{
+                      y: [0, -15, 0],
+                    }}
+                    transition={{
+                      duration: 4,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                    }}
+                  >
+                    <img
+                      src={process.env.PUBLIC_URL + "/assets/profile.jpeg"}
+                      alt="Ritik Ranjan"
+                      className="w-full rounded-2xl transition-all duration-500 hover:scale-105 shadow-[0_0_50px_rgba(34,211,238,0.35)]"
+                    />
+                  </motion.div>
+                </div>
+          </Tilt>
         </motion.div>
       </div>
       
